@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %}Logout - My Forum{% endblock %}
+
+{% block heading %}Logout{% endblock %}
+
+{% block content %}
+    <p>You have been logged out. <a href="{% url 'user_login' %}">Login again</a>.</p>
+{% endblock %}

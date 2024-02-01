@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Send Message - My Forum{% endblock %}
+
+{% block heading %}Send Message in {{ topic.title }}{% endblock %}
+
+{% block content %}
+    <form method="post" enctype="multipart/form-data" action="{% url 'send_message' topic.id %}">
+        {% csrf_token %}
+        {{ message_form.topic_id }}
+        {{ message_form.as_p }}
+        {{ attachment_form.as_p }}
+        <button type="submit">Send Message</button>
+    </form>
+{% endblock %}

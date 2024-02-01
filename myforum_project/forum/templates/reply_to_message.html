@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Reply to Message - My Forum{% endblock %}
+
+{% block heading %}Reply to Message in {{ topic.title }}{% endblock %}
+
+{% block content %}
+    <p>Original Message:</p>
+    <p>{{ original_message.content }} - {{ original_message.created_by.username }} at {{ original_message.created_at }}</p>
+
+    <form method="post" action="{% url 'reply_to_message' topic.id original_message.id %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Reply</button>
+    </form>
+{% endblock %}

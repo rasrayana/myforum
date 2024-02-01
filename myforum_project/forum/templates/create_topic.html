@@ -1,0 +1,14 @@
+{% extends 'forum/base.html' %}
+
+{% block title %}Create Topic - My Forum{% endblock %}
+
+{% block heading %}Create Topic in {{ section.name }}{% endblock %}
+
+{% block content %}
+    <form method="post" action="{% url 'create_topic' section.id %}">
+        {% csrf_token %}
+        {{ topic_form.as_p }}
+        {{ message_form.as_p }}
+        <button type="submit">Create Topic</button>
+    </form>
+{% endblock %}

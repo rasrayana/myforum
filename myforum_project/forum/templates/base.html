@@ -1,0 +1,31 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Forum{% endblock %}</title>
+    <script src="{% static 'websocket.js' %}"></script>
+    <script src="{% static 'js/chat.js' %}"></script>
+</head>
+<body>
+    <h1>{% block heading %}My Forum{% endblock %}</h1>
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+    <div id="user-actions">
+        {% if user.is_authenticated %}
+            <p>
+                Welcome, {{ user.username }}!
+                <a href="{% url 'user_profile' %}">Profile</a> |
+                <a href="{% url 'change_password' %}">Change Password</a> |
+                <a href="{% url 'user_logout' %}">Logout</a>
+            </p>
+        {% else %}
+            <p><a href="{% url 'user_login' %}">Login</a> | <a href="{% url 'user_register' %}">Register</a></p>
+        {% endif %}
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Close Topic - My Forum{% endblock %}
+
+{% block heading %}Close Topic{% endblock %}
+
+{% block content %}
+    <p>Are you sure you want to close the topic "{{ topic.title }}"?</p>
+    <form method="post" action="{% url 'close_topic' section.id topic.id %}">
+        {% csrf_token %}
+        <button type="submit">Close Topic</button>
+    </form>
+{% endblock %}

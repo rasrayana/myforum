@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Login - My Forum{% endblock %}
+
+{% block heading %}Login{% endblock %}
+
+{% block content %}
+    <form method="post" action="{% url 'user_login' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+    </form>
+    <a href="{% url 'user_register' %}">Don't have an account? Register here.</a>
+{% endblock %}

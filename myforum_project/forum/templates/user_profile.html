@@ -1,0 +1,17 @@
+    {% extends 'base.html' %}
+
+    {% block title %}User Profile - My Forum{% endblock %}
+    
+    {% block heading %}User Profile{% endblock %}
+    
+    {% block content %}
+        <p>Username: {{ user.username }}</p>
+        <p>Email: {{ user.email }}</p>
+        <form method="post" action="{% url 'user_profile' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="hidden" name="section_id" value="{{ section_id }}">
+            <button type="submit">Select Option</button>
+        </form>
+        <a href="{% url 'notification_list' %}">Notification List</a>
+    {% endblock %}

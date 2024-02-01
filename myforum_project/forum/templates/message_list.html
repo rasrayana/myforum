@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Список сообщений - Мой форум{% endblock %}
+
+{% block heading %}Сообщения в теме: {{ topic.title }}{% endblock %}
+
+{% block content %}
+<form method="post" action="{% url 'send_message' topic_id=topic.id %}">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Добавить сообщение</button>
+</form>
+
+
+<ul>
+    {% for message in messages %}
+        <li>
+            {{ message.content }}
+            <span>(Оценка: {{ message.ratings.count }})</span>
+            {% if user.is_authenticated %}
+            {% comment %}{% with user_rating=message.ratings.filter(user=user).first %}{% endcomment %}
+
+                    {% if user_rating %}
+                        <span>(Ваша оценка: {{ user_rating.rating }})</span>
+                    {% else %}
+                        <button onclick="rateMessage('{{ message.id }}', 1)">Нравится</button>
+                        <button onclick="rateMessage('{{ message.id }}', -1)">Не нравится</button>
+                    {% endif %}
+                    {% comment %}{% endwith %}{% endcomment %}
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}
+
+<script>
+    function rateMessage(messageId, rating) {
+        $.post('/rate-message/' + messageId + '/' + rating + '/', function (data) {
+            if (data.success) {
+                alert("Сообщение успешно оценено!");
+            } else {
+                alert("Не удалось оценить сообщение. Пожалуйста, попробуйте ещё раз.");
+            }
+        });
+    }
+</script>

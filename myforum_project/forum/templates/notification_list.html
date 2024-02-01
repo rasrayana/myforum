@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Notifications - My Forum{% endblock %}
+
+{% block heading %}Notifications{% endblock %}
+
+{% block content %}
+    <ul>
+        {% for notification in notifications %}
+            <li>{{ notification.message }} - {{ notification.created_at }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Message - My Forum{% endblock %}
+
+{% block heading %}Create Message{% endblock %}
+
+{% block content %}
+    <form method="post" action="{% url 'create_message' topic_id %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+    <a href="{% url 'message_list' topic_id %}">Back to Messages</a>
+{% endblock %}

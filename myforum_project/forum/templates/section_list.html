@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Sections - My Forum{% endblock %}
+
+{% block heading %}Sections{% endblock %}
+
+{% block content %}
+    <ul>
+        {% for section in sections %}
+            <li><a href="{% url 'topic_list' section.id %}">{{ section.name }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Private Messages - My Forum{% endblock %}
+
+{% block heading %}Private Messages{% endblock %}
+
+{% block content %}
+    <h2>Received Messages</h2>
+    <ul>
+        {% for message in received_messages %}
+            <li>{{ message.content }} - From: {{ message.sender.username }} at {{ message.created_at }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Sent Messages</h2>
+    <ul>
+        {% for message in sent_messages %}
+            <li>{{ message.content }} - To: {{ message.recipient.username }} at {{ message.created_at }}</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'send_private_messages' recipient_id=user.id %}">Send Private Message</a>
+{% endblock %}

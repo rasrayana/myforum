@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Topic List - My Forum{% endblock %}
+
+{% block heading %}Topics in {{ section.name }}{% endblock %}
+
+{% block content %}
+    <ul>
+        {% for topic in topics %}
+            <li>
+                <!-- Используйте 'topic_detail' для ссылки на детали темы, если у вас есть такой URL-шаблон -->
+                <a href="#">{{ topic.title }}</a>
+                {% if user.is_authenticated %}
+                    {% comment %}{% with is_subscribed=user.subscriptions.filter(topic=topic).exists %}{% endcomment %}
+                        {% if is_subscribed %}
+                            <span>(Subscribed)</span>
+                        {% else %}
+                            <button onclick="subscribeToTopic('{{ topic.id }}')">Subscribe</button>
+                        {% endif %}
+                        {% comment %}{% endwith %}{% endcomment %}
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="#">Create New Topic</a>
+{% endblock %}
+
+<script>
+    function subscribeToTopic(topicId) {
+        // логика для отправки запроса на сервер для подписки на тему, например, через AJAX.
+        alert("Subscribed to topic with ID: " + topicId);
+    }
+</script>
